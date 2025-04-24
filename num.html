@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Number Guessing Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f4f4f4;
+      text-align: center;
+    }
+
+    input[type="number"] {
+      padding: 10px;
+      width: 80px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Number Guessing Game</h1>
+  <p>Guess a number between 1 and 100</p>
+
+  <input type="number" id="guessInput" min="1" max="100">
+  <button onclick="checkGuess()">Guess</button>
+
+  <div id="result"></div>
+
+  <script>
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+
+    function checkGuess() {
+      const guess = parseInt(document.getElementById("guessInput").value);
+      const result = document.getElementById("result");
+      attempts++;
+
+      if (isNaN(guess) || guess < 1 || guess > 100) {
+        result.textContent = "⛔ Please enter a number between 1 and 100.";
+        return;
+      }
+
+      if (guess === randomNumber) {
+        result.textContent = `🎉 Correct! You guessed it in ${attempts} tries. The number was ${randomNumber}.`;
+      } else if (guess < randomNumber) {
+        result.textContent = "📉 Too low! Try again.";
+      } else {
+        result.textContent = "📈 Too high! Try again.";
+      }
+    }
+  </script>
+</body>
+</html>
